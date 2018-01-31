@@ -30,7 +30,7 @@ class GitHubAdapter(val mFilmsList: ArrayList<Item>) : RecyclerView.Adapter<GitH
         holder.bind(mFilm)
     }
 
-    fun loadItems(mFilmsList: ArrayList<Item>) {
+    fun loadItems(mFilmsList: List<Item>) {
         this.mFilmsList.addAll(mFilmsList)
         notifyDataSetChanged()
     }

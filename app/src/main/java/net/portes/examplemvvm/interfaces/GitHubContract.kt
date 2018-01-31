@@ -7,7 +7,7 @@ import net.portes.examplemvvm.pojos.Item
  */
 interface GitHubContract {
     interface View {
-        fun vwGitHubList(mFilmsList: ArrayList<Item>)
+        fun vwGitHubList(mFilmsList: List<Item>)
         fun vwGitHubError()
     }
 
@@ -23,6 +23,6 @@ interface GitHubContract {
 }
 
 interface OnGitHubListener {
-    fun onGitHubList(mFilmsList: ArrayList<Item>)
+    fun onGitHubList(mFilmsList: List<Item>)
     fun onGitHubError()
 }

@@ -10,13 +10,13 @@ class MainActivityViewModel : ViewModel() {
     companion object {
         val TAG = "MainActivityViewModel"
     }
-    var mGitHubList: ArrayList<Item>? = null
+    var mGitHubList: List<Item>? = null
 
-    fun getGitHubList(): ArrayList<Item>? {
+    fun getGitHubList(): List<Item>? {
         return mGitHubList
     }
 
-    fun setGitHubList(mGiHubList: ArrayList<Item>) {
+    fun setGitHubList(mGiHubList: List<Item>) {
         mGitHubList = mGiHubList
     }
 

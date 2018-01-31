@@ -6,7 +6,7 @@ import net.portes.examplemvvm.pojos.Item
  * Created by portes on 28/01/18.
  */
 class GitHubFactory {
-    fun parserSearch(mArrayList: ArrayList<Item>):ArrayList<Item>{
+    fun parserSearch(mArrayList: ArrayList<Item>):List<Item>{
         val mArrayListItem: ArrayList<Item> = ArrayList()
         for (item in mArrayList) {
             /*val mOwner = Owner(

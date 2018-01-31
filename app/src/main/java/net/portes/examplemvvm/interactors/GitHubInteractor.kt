@@ -15,6 +15,8 @@ import net.portes.examplemvvm.utils.GitHubFactory
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 
+
+
 /**
  * Created by portes on 28/01/18.
  */
@@ -29,30 +31,41 @@ class GitHubInteractor(val mContext: Context) : RetrofitService(), GitHubContrac
         AppDatabase.getInstance(mContext).itemDao()
     }
     val mExecutor: Executor by lazy {
-        Executors.newFixedThreadPool(2)
+        Executors.newFixedThreadPool(3)
     }
-
     override fun intGitHubList(mPerPage: String, mPage: String, mQuery: String, mOnGitHubListener: OnGitHubListener) {
         Log.i(TAG, "intGitHubList:")
+
+
         val mDisposable = getRetrofitInstance(mContext)
                 .create(GitHubInterface::class.java)
                 .getRepositories(mPerPage, mPage, mQuery)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ basic ->
-                    Log.i(TAG, "intGitHubList: ${basic.items}")
+
                     mExecutor.execute {
                         mItemDao.saveItem(basic.items)
                     }
-                    mOnGitHubListener.onGitHubList(mFactorym.parserSearch(basic.items))
+                    Log.i(TAG, "intGitHubList: ${basic.items}")
+                    localFromDb(mOnGitHubListener)
                 }, { e ->
                     e.printStackTrace()
+                    localFromDb(mOnGitHubListener)
                     mOnGitHubListener.onGitHubError()
                 })
         mComponentDisp.add(mDisposable)
     }
 
+    private fun localFromDb(mOnGitHubListener: OnGitHubListener) {
+        mItemDao.getItemAll()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { items -> mOnGitHubListener.onGitHubList(items)}
+    }
+
     override fun intComponentClear() {
         mComponentDisp.clear()
     }
+
 }

@@ -2,6 +2,7 @@ package net.portes.examplemvvm.view
 
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import kotlinx.android.synthetic.main.activity_main.*
@@ -9,6 +10,8 @@ import net.portes.examplemvvm.R
 import net.portes.examplemvvm.interfaces.GitHubContract
 import net.portes.examplemvvm.pojos.Item
 import net.portes.examplemvvm.presenters.GitHubPresenter
+import net.portes.examplemvvm.utils.action
+import net.portes.examplemvvm.utils.showSnack
 import net.portes.examplemvvm.view.adapters.GitHubAdapter
 import net.portes.examplemvvm.view.viewmodel.MainActivityViewModel
 
@@ -57,12 +60,17 @@ class MainActivity : BaseActivity(), GitHubContract.View {
     }
 
 
-    override fun vwGitHubList(mGiHubList: ArrayList<Item>) {
+    override fun vwGitHubList(mGiHubList: List<Item>) {
         mViewModel.setGitHubList(mGiHubList)
         mFilmAdapterm.loadItems(mGiHubList)
     }
 
     override fun vwGitHubError() {
+        coordinator.showSnack("Reintentar", Snackbar.LENGTH_INDEFINITE) {
+            action("Reintentar") {
+                mPresenter.presGitHubList("10", "1", "android")
+            }
+        }
         Log.e(TAG, "Ocurrio un error alv :v ")
     }
 }

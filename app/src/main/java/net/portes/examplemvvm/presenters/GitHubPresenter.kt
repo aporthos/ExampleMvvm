@@ -19,7 +19,7 @@ class GitHubPresenter(val mContext: Context, val mView: GitHubContract.View) : G
     override fun presGitHubList(mPerPage: String, mPage: String, mQuery: String) {
         mInteractorm.intGitHubList(mPerPage,mPage,  mQuery,this)
     }
-    override fun onGitHubList(mFilmsList: ArrayList<Item>) {
+    override fun onGitHubList(mFilmsList: List<Item>) {
         mView.vwGitHubList(mFilmsList)
     }
 
