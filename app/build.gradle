@@ -25,6 +25,9 @@ android {
     }
 }
 
+def roomVersion = "1.1.0-alpha1"
+def liveDataVersion = "1.1.0"
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
@@ -34,13 +37,13 @@ dependencies {
     //data binding
     kapt 'com.android.databinding:compiler:2.3.1'
     //ViewModel
-    implementation "android.arch.lifecycle:extensions:1.0.0-alpha5"
-    annotationProcessor "android.arch.lifecycle:compiler:1.0.0-alpha5"
+    implementation "android.arch.lifecycle:extensions:$liveDataVersion"
+    annotationProcessor "android.arch.lifecycle:compiler:$liveDataVersion"
     //Room
-    implementation "android.arch.persistence.room:runtime:1.0.0-alpha5"
-    annotationProcessor "android.arch.persistence.room:compiler:1.0.0-alpha5"
-    compile "android.arch.persistence.room:rxjava2:1.0.0-alpha5"
-    kapt "android.arch.persistence.room:compiler:1.0.0-alpha5"
+    implementation "android.arch.persistence.room:runtime:$roomVersion"
+    annotationProcessor "android.arch.persistence.room:compiler:$roomVersion"
+    compile "android.arch.persistence.room:rxjava2:$roomVersion"
+    kapt "android.arch.persistence.room:compiler:$roomVersion"
     //Retrofit
     implementation "com.squareup.retrofit2:converter-gson:2.1.0"
     //RxJava

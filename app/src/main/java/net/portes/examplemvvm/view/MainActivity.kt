@@ -47,6 +47,9 @@ class MainActivity : BaseActivity(), GitHubContract.View {
         rViewFilm.setHasFixedSize(true)
         rViewFilm.layoutManager = LinearLayoutManager(this)
         rViewFilm.adapter = mFilmAdapterm
+        swipeRefresh.setOnRefreshListener {
+            mPresenter.presGitHubList("10", "1", "android")
+        }
     }
 
     fun getObserverViewModel() {
@@ -54,7 +57,6 @@ class MainActivity : BaseActivity(), GitHubContract.View {
             Log.i(TAG, "getObserverViewModel: fromViewModel")
             mFilmAdapterm.loadItems(mViewModel.getGitHubList()!!)
         } else {
-            Log.i(TAG, "getObserverViewModel: fromNetwork")
             mPresenter.presGitHubList("10", "1", "android")
         }
     }
@@ -71,6 +73,5 @@ class MainActivity : BaseActivity(), GitHubContract.View {
                 mPresenter.presGitHubList("10", "1", "android")
             }
         }
-        Log.e(TAG, "Ocurrio un error alv :v ")
     }
 }

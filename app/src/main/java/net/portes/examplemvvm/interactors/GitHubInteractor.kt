@@ -43,7 +43,6 @@ class GitHubInteractor(val mContext: Context) : RetrofitService(), GitHubContrac
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ basic ->
-
                     mExecutor.execute {
                         mItemDao.saveItem(basic.items)
                     }
